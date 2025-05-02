@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
+import treinoRoutes from "./routes/treinoRoutes.js";
 
 dotenv.config();
 
@@ -11,6 +12,9 @@ app.use(express.json());
 
 // Usar as rotas de autenticação
 app.use("/api/auth", authRoutes);
+
+// Rotas para treinos
+app.use("/api/treinos", treinoRoutes);
 
 // Rota padrão para testar a API
 app.get("/", (req, res) => {

@@ -8,7 +8,7 @@ dotenv.config();
 // Função para registrar um novo usuário
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { username, email, password } = req.body;
 
     // Validação do e-mail
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/;
@@ -32,13 +32,14 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     
     // Criar usuário no banco de dados
-    await createUser({ name, email, password: hashedPassword });
+    await createUser({ username, email, password: hashedPassword });
     
     return res.status(201).json({ message: "Usuário registrado com sucesso!" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
+
 
 // Função para fazer login de um usuário
 export const loginUser = async (req, res) => {
